@@ -7,28 +7,28 @@ pub struct Queue<T> {
 impl<T> Queue<T> {
     pub fn new() -> Queue<T> {
         Queue {
-            elements: LinkedList::new(),
+            element: LinkedList::new(),
         }
     }
 
     pub fn enqueue(&mut self, value: T) {
-        self.elements.push_back(value)
+        self.element.push_back(value)
     }
 
     pub fn dequeue(&mut self) -> Option<T> {
-        self.elements.pop_front()
+        self.element.pop_front()
     }
 
     pub fn peek_front(&self) -> Option<&T> {
-        self.elements.front()
+        self.element.front()
     }
 
     pub fn len(&self) -> usize {
-        self.elements.len()
+        self.element.len()
     }
 
     pub fn is_empty(&self) -> bool {
-        self.elements.is_empty()
+        self.element.is_empty()
     }
 }
 
@@ -43,30 +43,30 @@ mod tests {
 
     fn test_enqueue() {
         let mut queue: Queue<u8> = Queue::new();
-        queue.enqueue(64);
+        queue.enqueue(87);
         assert_eq!(queue.is_empty(), false);
     }
 
     fn test_dequeue() {
         let mut queue: Queue<u8> = Queue::new();
+        queue.enqueue(16);
         queue.enqueue(32);
-        queue.enqueue(64);
         let retrieved_dequeue = queue.dequeue();
         assert_eq!(retrieved_dequeue, Some(32));
     }
 
     fn test_peek_front() {
         let mut queue: Queue<u8> = Queue::new();
+        queue.enqueue(4);
         queue.enqueue(8);
-        queue.enqueue(16);
         let retrieved_peek = queue.peek_front();
         assert_eq!(retrieved_peek, Some(&8));
     }
 
     fn test_size() {
         let mut queue: Queue<u8> = Queue::new();
-        queue.enqueue(8);
-        queue.enqueue(16);
+        queue.enqueue(2);
+        queue.enqueue(4);
         assert_eq!(2, queue.len());
     }
 }
